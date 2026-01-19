@@ -33,6 +33,12 @@
   color: var(--text-color);
 }
 
+.admin-panel label {
+  font-weight: 500;
+  color: var(--text-color);
+  margin-top: 0.5rem;
+}
+
 .admin-login input, .add-module-form input, .add-module-form textarea {
   padding: 0.75rem;
   border: 1px solid var(--border-color);
@@ -40,6 +46,20 @@
   font-size: 1rem;
   background: var(--background-color);
   color: var(--text-color);
+}
+
+.add-module-form select {
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background: var(--background-color);
+  color: var(--text-color);
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--secondary-text-color) 50%), linear-gradient(135deg, var(--secondary-text-color) 50%, transparent 50%);
+  background-position: calc(100% - 20px) calc(1rem + 2px), calc(100% - 15px) calc(1rem + 2px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
 }
 
 .primary-btn {

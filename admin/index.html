@@ -42,14 +42,22 @@
         </thead>
         <tbody id="modulesBody"></tbody>
       </table>
-      <h3>Adicionar Módulo</h3>
+      <h3>Adicionar Conteúdo Personalizado</h3>
       <form id="addModuleForm" class="add-module-form">
-        <input type="text" id="modName" placeholder="Nome do módulo" required>
-        <input type="text" id="modVersion" placeholder="Versão" required>
-        <textarea id="modJSON" placeholder="Cole aqui o conteúdo JSON do módulo" rows="6" required></textarea>
+        <label for="itemType">Tipo de conteúdo</label>
+        <select id="itemType" required>
+          <option value="" disabled selected>Selecione...</option>
+          <option value="devotional">Devocional</option>
+          <option value="study">Estudo</option>
+          <option value="outline">Esboço</option>
+          <option value="theme">Tema</option>
+          <option value="version">Versão</option>
+        </select>
+        <!-- Campos dinâmicos serão inseridos aqui -->
+        <div id="itemFields"></div>
         <button type="submit" class="primary-btn">Adicionar</button>
       </form>
-      <p class="admin-tip">Obs.: Este painel salva dados apenas no seu navegador (localStorage). Para integrar uma expansão oficialmente, exporte o manifesto atualizado e o arquivo JSON e coloque-os na pasta <code>content</code> do projeto.</p>
+      <p class="admin-tip">Obs.: Este painel salva dados apenas no seu navegador (localStorage). Para integrar um novo conteúdo oficialmente, exporte o manifesto atualizado e os JSONs correspondentes e coloque-os na pasta <code>content</code> do projeto.</p>
       <button id="exportButton" class="primary-btn">Exportar Manifesto</button>
       <a id="downloadLink" style="display:none;"></a>
     </div>

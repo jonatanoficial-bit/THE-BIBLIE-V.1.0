@@ -179,19 +179,8 @@ function renderStudies(container) {
 }
 
 function renderVersions(container) {
-  const list = document.createElement('div');
-  list.className = 'card-list';
-  state.data.versions.forEach(item => {
-    const card = document.createElement('article');
-    card.className = 'card';
-    card.innerHTML = `
-      <h3>${item.name}</h3>
-      <p>${item.description}</p>
-    `;
-    card.addEventListener('click', () => openVersion(item));
-    list.appendChild(card);
-  });
-  container.appendChild(list);
+  // Mostra lista de versões disponíveis
+  renderVersionList(container);
 }
 
 function renderOutlines(container) {
@@ -310,6 +299,118 @@ function showThemeContent(theme) {
 }
 
 /**
+ * Renderiza a lista de versões disponíveis. Ao clicar em uma versão, exibe seus livros.
+ */
+function renderVersionList(container) {
+  container.innerHTML = '';
+  const heading = document.createElement('h2');
+  heading.textContent = 'Versões da Bíblia';
+  container.appendChild(heading);
+  const list = document.createElement('div');
+  list.className = 'card-list';
+  state.data.versions.forEach(item => {
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.innerHTML = `
+      <h3>${item.name}</h3>
+      <p>${item.description}</p>
+    `;
+    card.addEventListener('click', () => renderVersionDetail(item));
+    list.appendChild(card);
+  });
+  container.appendChild(list);
+}
+
+/**
+ * Renderiza os livros de uma versão.
+ * @param {Object} version
+ */
+function renderVersionDetail(version) {
+  const container = document.getElementById('content');
+  container.innerHTML = '';
+  // Cabeçalho e botão de voltar
+  const backBtn = document.createElement('button');
+  backBtn.className = 'link-item';
+  backBtn.textContent = '← Voltar às versões';
+  backBtn.addEventListener('click', () => renderVersionList(container));
+  container.appendChild(backBtn);
+  const heading = document.createElement('h2');
+  heading.textContent = version.name;
+  container.appendChild(heading);
+  // Lista de livros
+  const list = document.createElement('div');
+  list.className = 'card-list';
+  if (version.books) {
+    version.books.forEach(book => {
+      const card = document.createElement('article');
+      card.className = 'card';
+      card.innerHTML = `
+        <h3>${book.name}</h3>
+        <p>${book.chapters.length} capítulos</p>
+      `;
+      card.addEventListener('click', () => renderBookDetail(version, book));
+      list.appendChild(card);
+    });
+  } else {
+    const p = document.createElement('p');
+    p.textContent = 'Esta versão não possui livros cadastrados.';
+    container.appendChild(p);
+  }
+  container.appendChild(list);
+}
+
+/**
+ * Mostra os capítulos de um livro de determinada versão.
+ */
+function renderBookDetail(version, book) {
+  const container = document.getElementById('content');
+  container.innerHTML = '';
+  // Botão de voltar aos livros da versão
+  const backBtn = document.createElement('button');
+  backBtn.className = 'link-item';
+  backBtn.textContent = `← Voltar a ${version.name}`;
+  backBtn.addEventListener('click', () => renderVersionDetail(version));
+  container.appendChild(backBtn);
+  const heading = document.createElement('h2');
+  heading.textContent = `${version.name} — ${book.name}`;
+  container.appendChild(heading);
+  // Listagem de capítulos
+  const list = document.createElement('div');
+  list.className = 'card-list';
+  book.chapters.forEach(ch => {
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.innerHTML = `
+      <h3>Capítulo ${ch.number}</h3>
+      <p>${truncate(ch.text, 80)}</p>
+    `;
+    card.addEventListener('click', () => renderChapter(version, book, ch));
+    list.appendChild(card);
+  });
+  container.appendChild(list);
+}
+
+/**
+ * Mostra o texto de um capítulo.
+ */
+function renderChapter(version, book, chapter) {
+  const container = document.getElementById('content');
+  container.innerHTML = '';
+  // Botão de voltar aos capítulos
+  const backBtn = document.createElement('button');
+  backBtn.className = 'link-item';
+  backBtn.textContent = `← Voltar a ${book.name}`;
+  backBtn.addEventListener('click', () => renderBookDetail(version, book));
+  container.appendChild(backBtn);
+  const heading = document.createElement('h2');
+  heading.textContent = `${book.name} ${chapter.number}`;
+  container.appendChild(heading);
+  const p = document.createElement('p');
+  p.textContent = chapter.text;
+  container.appendChild(p);
+}
+
+/**
  * Abre modal genérico.
  */
 function openModal() {
@@ -326,13 +427,8 @@ function closeModal() {
  * Tratamento de versões: alert informando ao usuário que este recurso é para leitura futura.
  */
 function openVersion(item) {
-  const body = document.getElementById('modalBody');
-  body.innerHTML = `
-    <h2>${item.name}</h2>
-    <p>${item.description}</p>
-    <p>Recurso de leitura de versões será implementado em futuras expansões. Por enquanto, consulte a sua Bíblia física ou outro aplicativo para leitura completa.</p>
-  `;
-  openModal();
+  // Antigo openVersion substituído por navegação detalhada
+  renderVersionDetail(item);
 }
 
 /**

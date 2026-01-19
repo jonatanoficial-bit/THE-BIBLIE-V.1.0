@@ -5,8 +5,9 @@ Bem‑vindo ao **Bíblia Premium**, um aplicativo web com foco em dispositivos m
 ## Principais recursos
 
 - **Mobile‑first e responsivo:** O layout foi desenvolvido pensando primeiro em smartphones e funciona perfeitamente em tablets e desktops, mantendo a legibilidade e a fluidez.
-- **Visual Premium:** Utilizamos gradientes sofisticados, sombras suaves, microinterações e tipografia impecável para criar uma aparência digna de aplicativos de alto padrão. Animar botões e feedbacks imediatos seguem boas práticas de microinterações, que sugerem que pequenas animações devem ser propositais, sutis e fornecer feedback instantâneo ao usuário【459995116724399†L40-L80】【459995116724399†L86-L129】. O tema suporta modo claro e escuro, com cores definidas por variáveis CSS conforme as recomendações de design em 2025【680467973575663†L79-L116】.
+- **Visual Premium:** O aplicativo utiliza um fundo abstrato em degradê com cores profundas, botões com efeitos de brilho e gradientes, cartas semi‑transparentes com bordas arredondadas e sombras suaves. Esses elementos trazem sofisticação e destacam o conteúdo, em conformidade com as boas práticas de microinterações, que recomendam animações sutis e feedback imediato para manter o usuário engajado【459995116724399†L40-L80】【459995116724399†L86-L129】. O tema suporta modo claro e escuro, com cores definidas por variáveis CSS conforme as recomendações de design em 2025【680467973575663†L79-L116】.
 - **Conteúdo modular:** Toda a informação (devocionais, estudos, temas, etc.) é carregada dinamicamente a partir de arquivos JSON em `/content`. O arquivo `manifest.json` lista os módulos disponíveis e controla se estão habilitados. Novas expansões podem ser adicionadas sem alterar o código principal.
+ - **Versões bíblicas incluídas:** O conteúdo base já traz trechos de três traduções populares em português (NVI, ACF e ARC). A interface de leitura permite navegar da lista de versões para os livros e capítulos disponíveis, exibindo o texto diretamente no aplicativo.
 - **Área Administrativa:** Uma interface de administração permite ativar/desativar módulos, criar DLCs personalizadas e exportar um manifesto atualizado. O login local utiliza credenciais padrão (usuário: **admin** / senha: **admin123**) e pode ser estendido para um backend futuro.
 - **Arquitetura expansível:** O projeto é organizado para crescer. Pastas claras (`content/` para dados, `admin/` para interface administrativa, `assets/` para imagens), código comentado e separação de responsabilidades facilitam a manutenção.
 
@@ -86,7 +87,7 @@ O painel administrativo é uma ferramenta opcional para ajudar a gerenciar conte
 
 1. **Login local:** digite as credenciais padrão (pode ser alterado no código). Se preferir integrar com backend no futuro, substitua a lógica de autenticação por uma API.
 2. **Ativar/desativar DLCs:** cada módulo aparece com um interruptor. Alterar o estado persiste no `localStorage`. Para refletir no projeto oficial, exporte o manifesto e substitua o arquivo na pasta `content`.
-3. **Criar novo módulo:** cole o JSON do módulo na área de texto, informe um nome e versão. O módulo é salvo no `localStorage` com prefixo `custom_` e fica listado na tabela. Para integrá-lo ao projeto, use os botões de exportação para baixar o JSON e atualize o `manifest.json`.
+3. **Adicionar conteúdo personalizado:** um formulário intuitivo permite criar devocionais, estudos, esboços, temas ou novas versões sem escrever JSON manualmente. Selecione o tipo de conteúdo, preencha os campos necessários e o painel gera um módulo personalizado automaticamente no `localStorage`. Para integrá-lo ao projeto oficial, exporte o manifest e o arquivo JSON gerado e coloque-os na pasta `content`.
 4. **Exportar Manifesto:** gera um arquivo `manifest.json` com as modificações locais (ativação de DLCs e módulos personalizados). Baixe este arquivo e substitua o original para disponibilizar as mudanças para todos.
 
 ## Boas práticas de design adotadas

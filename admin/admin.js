@@ -125,6 +125,68 @@ function updateModuleEnabled(id, enabled) {
   saveManifestOverride(override);
 }
 
+/**
+ * Atualiza os campos do formulário de acordo com o tipo selecionado.
+ * Esta função cria os inputs dinamicamente no contêiner #itemFields.
+ * @param {String} type
+ */
+function updateItemFields(type) {
+  const container = document.getElementById('itemFields');
+  container.innerHTML = '';
+  if (!type) return;
+  // Helper para criar campo
+  function createInput(id, label, typeInput = 'text', placeholder = '') {
+    const labelEl = document.createElement('label');
+    labelEl.htmlFor = id;
+    labelEl.textContent = label;
+    const input = document.createElement('input');
+    input.id = id;
+    input.type = typeInput;
+    if (placeholder) input.placeholder = placeholder;
+    container.appendChild(labelEl);
+    container.appendChild(input);
+  }
+  function createTextarea(id, label, placeholder = '', rows = 4) {
+    const labelEl = document.createElement('label');
+    labelEl.htmlFor = id;
+    labelEl.textContent = label;
+    const textarea = document.createElement('textarea');
+    textarea.id = id;
+    textarea.rows = rows;
+    textarea.placeholder = placeholder;
+    container.appendChild(labelEl);
+    container.appendChild(textarea);
+  }
+  switch (type) {
+    case 'devotional':
+      createInput('fieldTitle', 'Título');
+      createInput('fieldDate', 'Data (AAAA-MM-DD)', 'date');
+      createInput('fieldVerses', 'Referência (versículos)', 'text');
+      createTextarea('fieldContent', 'Texto do Devocional', 'Escreva o conteúdo aqui...', 5);
+      break;
+    case 'study':
+      createInput('fieldTitle', 'Título');
+      createTextarea('fieldDescription', 'Descrição', 'Breve resumo...', 3);
+      createTextarea('fieldContent', 'Conteúdo', 'Escreva o estudo completo...', 6);
+      break;
+    case 'outline':
+      createInput('fieldTitle', 'Título');
+      createTextarea('fieldPoints', 'Pontos (separe com nova linha ou ponto e vírgula)', 'Ex.: Introdução; Corpo; Conclusão', 4);
+      createInput('fieldVerses', 'Referência Bíblica', 'text');
+      break;
+    case 'theme':
+      createInput('fieldTitle', 'Título');
+      createTextarea('fieldDescription', 'Descrição', 'Descreva o tema...', 3);
+      break;
+    case 'version':
+      createInput('fieldVersionId', 'ID (sigla)');
+      createInput('fieldVersionName', 'Nome da Versão');
+      createTextarea('fieldVersionDesc', 'Descrição da Versão', 'Ex.: Tradução moderna...', 3);
+      createTextarea('fieldBooks', 'Livros (JSON)', 'Cole o array de livros em formato JSON... Ex.: [{"id":"gn","name":"Gênesis","chapters":[{"number":1,"text":"..."}]}]', 8);
+      break;
+  }
+}
+
 /** Exporta o manifesto mesclado para download */
 async function exportManifest() {
   const manifest = await loadManifest();
@@ -156,33 +218,119 @@ function exportCustomModule(id) {
 /** Trata envio do formulário de adição de módulo */
 function handleAddModuleForm() {
   const form = document.getElementById('addModuleForm');
+  const typeSelect = document.getElementById('itemType');
+  const fieldsContainer = document.getElementById('itemFields');
+  // Atualiza campos quando o tipo muda
+  typeSelect.addEventListener('change', () => {
+    updateItemFields(typeSelect.value);
+  });
   form.addEventListener('submit', e => {
     e.preventDefault();
-    const name = document.getElementById('modName').value.trim();
-    const version = document.getElementById('modVersion').value.trim();
-    const jsonText = document.getElementById('modJSON').value.trim();
-    if (!name || !version || !jsonText) return;
-    let content;
-    try {
-      content = JSON.parse(jsonText);
-    } catch (err) {
-      alert('JSON inválido. Por favor, verifique a sintaxe.');
-      return;
+    const type = typeSelect.value;
+    if (!type) return;
+    // Monta objeto de conteúdo baseado no tipo
+    const timestamp = Date.now();
+    let moduleId = `custom_${type}_${timestamp}`;
+    let moduleName = '';
+    let content = {
+      name: 'Conteúdo Personalizado',
+      version: '1.0',
+      enabled: true,
+      sections: {}
+    };
+    if (type === 'devotional') {
+      const title = document.getElementById('fieldTitle').value.trim();
+      const date = document.getElementById('fieldDate').value.trim();
+      const verses = document.getElementById('fieldVerses').value.trim();
+      const text = document.getElementById('fieldContent').value.trim();
+      if (!title || !date || !verses || !text) return;
+      moduleName = `Devocional: ${title}`;
+      content.sections.devotionals = [
+        {
+          id: moduleId,
+          title: title,
+          date: date,
+          verses: verses,
+          content: text
+        }
+      ];
+    } else if (type === 'study') {
+      const title = document.getElementById('fieldTitle').value.trim();
+      const desc = document.getElementById('fieldDescription').value.trim();
+      const text = document.getElementById('fieldContent').value.trim();
+      if (!title || !desc || !text) return;
+      moduleName = `Estudo: ${title}`;
+      content.sections.studies = [
+        {
+          id: moduleId,
+          title: title,
+          description: desc,
+          content: text
+        }
+      ];
+    } else if (type === 'outline') {
+      const title = document.getElementById('fieldTitle').value.trim();
+      const pointsRaw = document.getElementById('fieldPoints').value.trim();
+      const verses = document.getElementById('fieldVerses').value.trim();
+      if (!title || !pointsRaw || !verses) return;
+      const points = pointsRaw.split(/\n|;/).map(p => p.trim()).filter(Boolean);
+      moduleName = `Esboço: ${title}`;
+      content.sections.outlines = [
+        {
+          id: moduleId,
+          title: title,
+          points: points,
+          verses: verses
+        }
+      ];
+    } else if (type === 'theme') {
+      const title = document.getElementById('fieldTitle').value.trim();
+      const desc = document.getElementById('fieldDescription').value.trim();
+      if (!title || !desc) return;
+      moduleName = `Tema: ${title}`;
+      content.sections.themes = [
+        {
+          id: moduleId,
+          title: title,
+          description: desc
+        }
+      ];
+    } else if (type === 'version') {
+      const vid = document.getElementById('fieldVersionId').value.trim();
+      const vname = document.getElementById('fieldVersionName').value.trim();
+      const vdesc = document.getElementById('fieldVersionDesc').value.trim();
+      const booksJson = document.getElementById('fieldBooks').value.trim();
+      if (!vid || !vname || !booksJson) return;
+      let books;
+      try {
+        books = JSON.parse(booksJson);
+      } catch (err) {
+        alert('JSON de livros inválido.');
+        return;
+      }
+      moduleId = `custom_version_${vid}_${timestamp}`;
+      moduleName = `Versão: ${vname}`;
+      content.sections.versions = [
+        {
+          id: vid,
+          name: vname,
+          description: vdesc,
+          books: books
+        }
+      ];
     }
-    // Gera id baseado no nome
-    const idBase = name.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
-    const id = `custom_${idBase}`;
     // Salva conteúdo no localStorage
-    saveCustomModule(id, content);
-    // Adiciona módulo ao manifest override
+    saveCustomModule(moduleId, content);
+    // Atualiza manifest override
     const override = getManifestOverride() || { modules: [] };
-    override.modules.push({ id, name, file: `${id}.json`, version, enabled: false });
+    override.modules.push({ id: moduleId, name: moduleName, file: `${moduleId}.json`, version: '1.0', enabled: true });
     saveManifestOverride(override);
-    // Limpa formulário
+    // Reseta formulário
     form.reset();
-    // Atualiza lista
+    fieldsContainer.innerHTML = '';
+    // Atualiza lista de módulos
     renderModules();
-    alert('Módulo adicionado localmente. Não esqueça de exportar o JSON e o manifesto.');
+    alert('Conteúdo adicionado localmente. Exporte o manifesto e o JSON para integrá-los ao projeto.');
   });
 }
 
