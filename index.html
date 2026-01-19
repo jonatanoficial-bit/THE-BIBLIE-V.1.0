@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App Bíblico Premium</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1>Bíblia Premium</h1>
+    <button id="themeToggle" class="icon-btn" title="Alternar tema">
+      <!-- Ícone sol (tema claro) -->
+      <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon">
+        <path d="M12 4.75a.75.75 0 0 1 .75-.75h.5a.75.75 0 1 1 0 1.5h-.5A.75.75 0 0 1 12 4.75zM6.364 6.364a.75.75 0 1 1 1.06-1.06l.354.353a.75.75 0 0 1-1.06 1.061l-.354-.354zM4.75 12a.75.75 0 0 1-.75-.75v-.5a.75.75 0 0 1 1.5 0v.5a.75.75 0 0 1-.75.75zm1.614 6.114a.75.75 0 0 1 0-1.06l.354-.354a.75.75 0 1 1 1.06 1.06l-.354.354a.75.75 0 0 1-1.06 0zM12 19.25a.75.75 0 0 1-.75.75h-.5a.75.75 0 0 1 0-1.5h.5a.75.75 0 0 1 .75.75zm6.114-1.614a.75.75 0 0 1-1.06 0l-.354-.354a.75.75 0 0 1 1.06-1.06l.354.354a.75.75 0 0 1 0 1.06zM19.25 12a.75.75 0 0 1 .75.75v.5a.75.75 0 0 1-1.5 0v-.5a.75.75 0 0 1 .75-.75zm-1.614-6.114a.75.75 0 0 1 0 1.06l-.354.354a.75.75 0 1 1-1.06-1.06l.354-.354a.75.75 0 0 1 1.06 0zM12 7.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9z" fill="currentColor"/>
+      </svg>
+      <!-- Ícone lua (tema escuro) -->
+      <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="icon" style="display: none;">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 1 0 9.79 9.79z" fill="currentColor"/>
+      </svg>
+    </button>
+  </header>
+  <nav class="main-nav">
+    <button class="nav-item" data-section="devotionals">Devocionais</button>
+    <button class="nav-item" data-section="studies">Estudos</button>
+    <button class="nav-item" data-section="versions">Versões</button>
+    <button class="nav-item" data-section="outlines">Esboços</button>
+    <button class="nav-item" data-section="themes">Temas</button>
+    <button class="nav-item" data-section="admin">Admin</button>
+  </nav>
+  <main id="content" class="content-area">
+    <!-- Conteúdo dinâmico será inserido aqui -->
+  </main>
+  <!-- Modal para detalhes -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <button id="closeModal" class="modal-close" aria-label="Fechar modal">×</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

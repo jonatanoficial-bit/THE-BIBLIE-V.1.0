@@ -1,0 +1,93 @@
+{
+  "name": "Conteúdo Base",
+  "version": "1.0",
+  "enabled": true,
+  "sections": {
+    "versions": [
+      {
+        "id": "nvi",
+        "name": "NVI",
+        "description": "Nova Versão Internacional"
+      },
+      {
+        "id": "acf",
+        "name": "ACF",
+        "description": "Almeida Corrigida Fiel"
+      },
+      {
+        "id": "arc",
+        "name": "ARC",
+        "description": "Almeida Revista e Corrigida"
+      }
+    ],
+    "devotionals": [
+      {
+        "id": "devo1",
+        "title": "Confiança em Deus",
+        "date": "2026-01-19",
+        "verses": "Provérbios 3:5-6",
+        "content": "Confie no Senhor de todo o seu coração e não se apoie em seu próprio entendimento. Reconheça o Senhor em todos os seus caminhos, e ele endireitará as suas veredas. Este devocional nos lembra que a verdadeira sabedoria está em depender de Deus em todas as áreas de nossa vida."
+      },
+      {
+        "id": "devo2",
+        "title": "O Poder da Oração",
+        "date": "2026-01-20",
+        "verses": "Filipenses 4:6-7",
+        "content": "Não andem ansiosos por coisa alguma, mas em tudo, pela oração e súplica, e com ação de graças, apresentem seus pedidos a Deus. E a paz de Deus, que excede todo entendimento, guardará os seus corações e as suas mentes em Cristo Jesus. Lembre-se de que a oração nos aproxima do coração de Deus."
+      }
+    ],
+    "studies": [
+      {
+        "id": "study1",
+        "title": "Salmos como Oração",
+        "description": "Um estudo sobre como os Salmos nos ensinam a orar e a expressar nossos sentimentos diante de Deus.",
+        "content": "Os Salmos são cânticos e orações que abrangem a gama completa das emoções humanas — alegria, tristeza, arrependimento e louvor. Neste estudo, exploramos como cada salmo pode servir como modelo de oração e como aplicar essas lições em nossas vidas diárias."
+      },
+      {
+        "id": "study2",
+        "title": "Vida e Ministério de Jesus",
+        "description": "Estudo cronológico dos acontecimentos principais na vida de Jesus Cristo, desde o nascimento até a ressurreição.",
+        "content": "Este estudo percorre os Evangelhos destacando os ensinamentos de Jesus, seus milagres e parábolas. Também aborda como cada evento histórico se conecta ao plano redentor de Deus para a humanidade."
+      }
+    ],
+    "outlines": [
+      {
+        "id": "outline1",
+        "title": "O Amor de Deus",
+        "points": [
+          "O amor de Deus demonstrado na criação",
+          "O amor sacrificial de Jesus na cruz",
+          "Nossa resposta: amar a Deus e ao próximo"
+        ],
+        "verses": "1 Coríntios 13"
+      },
+      {
+        "id": "outline2",
+        "title": "Fé que Move Montanhas",
+        "points": [
+          "Definição bíblica de fé",
+          "Exemplos de fé no Antigo Testamento",
+          "Aplicando a fé nas situações diárias"
+        ],
+        "verses": "Hebreus 11"
+      }
+    ],
+    "themes": [
+      {
+        "id": "theme1",
+        "title": "Fé",
+        "description": "Estudos e devocionais que fortalecem a fé."
+      },
+      {
+        "id": "theme2",
+        "title": "Esperança",
+        "description": "Conteúdos focados na esperança cristã e na vida eterna."
+      },
+      {
+        "id": "theme3",
+        "title": "Amor",
+        "description": "Lições sobre o amor de Deus e como viver em amor."
+      }
+    ]
+  }
+}

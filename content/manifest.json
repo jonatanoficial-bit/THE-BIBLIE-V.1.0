@@ -1,0 +1,18 @@
+{
+  "modules": [
+    {
+      "id": "base",
+      "name": "Conteúdo Base",
+      "file": "base.json",
+      "version": "1.0",
+      "enabled": true
+    },
+    {
+      "id": "expansion_sample",
+      "name": "Expansão Exemplo",
+      "file": "expansion_sample.json",
+      "version": "1.0",
+      "enabled": false
+    }
+  ]
+}

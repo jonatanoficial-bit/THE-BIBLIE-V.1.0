@@ -1,0 +1,31 @@
+{
+  "name": "Expansão Exemplo",
+  "version": "1.0",
+  "enabled": false,
+  "sections": {
+    "devotionals": [
+      {
+        "id": "devo_exp1",
+        "title": "Perseverança na Tribulação",
+        "date": "2026-01-21",
+        "verses": "Romanos 12:12",
+        "content": "Alegrem-se na esperança, sejam pacientes na tribulação, perseverem na oração. Esta mensagem encoraja a manter o foco em Deus mesmo nos dias difíceis, confiando em sua provisão e fidelidade."
+      }
+    ],
+    "studies": [
+      {
+        "id": "study_exp1",
+        "title": "A Armadura de Deus",
+        "description": "Uma análise das peças da armadura de Efésios 6 e como aplicá-las na luta espiritual.",
+        "content": "Este estudo examina cada elemento da armadura de Deus — cinto da verdade, couraça da justiça, calçados da prontidão, escudo da fé, capacete da salvação e espada do Espírito — explicando seu significado e utilidade na vida cristã."
+      }
+    ],
+    "themes": [
+      {
+        "id": "theme_exp1",
+        "title": "Perseverança",
+        "description": "Conteúdos que estimulam a persistência e a fé durante desafios."
+      }
+    ]
+  }
+}

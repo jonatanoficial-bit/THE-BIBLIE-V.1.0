@@ -1,0 +1,122 @@
+/*
+ * Estilos específicos para a área administrativa
+ */
+
+.admin-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.admin-login, .admin-panel {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-top: 2rem;
+}
+
+.admin-login h2, .admin-panel h2 {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+.admin-login form, .add-module-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.admin-login label {
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.admin-login input, .add-module-form input, .add-module-form textarea {
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+.primary-btn {
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.primary-btn:hover {
+  background: var(--primary-color-dark);
+  transform: translateY(-2px);
+}
+
+.logout-btn {
+  align-self: flex-end;
+  margin-bottom: 1rem;
+  background: var(--primary-color-dark);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: var(--primary-color);
+}
+
+.modules-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.modules-table th, .modules-table td {
+  border: 1px solid var(--border-color);
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.modules-table th {
+  background: var(--primary-color);
+  color: #fff;
+  font-weight: 600;
+}
+
+.modules-table td input[type="checkbox"] {
+  transform: scale(1.2);
+}
+
+.small-btn {
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s ease;
+}
+
+.small-btn:hover {
+  background: var(--primary-color-dark);
+}
+
+.admin-tip {
+  font-size: 0.9rem;
+  color: var(--secondary-text-color);
+  margin: 0.5rem 0 1rem;
+}
+
+.hidden {
+  display: none !important;
+}

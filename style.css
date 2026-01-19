@@ -1,0 +1,297 @@
+/*
+ * Estilos globais para o App Bíblico Premium
+ * O design é mobile-first com tema claro/escuro, gradientes elegantes,
+ * botões com microinterações e layouts responsivos.
+ */
+
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--background-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Tema claro e escuro usando atributos data-theme na tag html */
+html[data-theme='light'] {
+  --background-color: #f4f6fc;
+  --surface-color: #ffffff;
+  --primary-color: #5B6EF5;
+  --primary-color-light: #8e9cfd;
+  --primary-color-dark: #4959c3;
+  --text-color: #0c1a39;
+  --secondary-text-color: #5a6a8e;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --overlay-color: rgba(255, 255, 255, 0.6);
+}
+
+html[data-theme='dark'] {
+  --background-color: #0c1023;
+  --surface-color: #151a33;
+  --primary-color: #7886f9;
+  --primary-color-light: #a3afff;
+  --primary-color-dark: #565fc5;
+  --text-color: #f1f5ff;
+  --secondary-text-color: #a0a8c5;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --overlay-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Cabeçalho */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--primary-color-dark), var(--primary-color));
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.app-header h1 {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+/* Botão de alternância de tema */
+.icon-btn {
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+/* Navegação principal */
+.main-nav {
+  display: flex;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--surface-color);
+}
+
+.nav-item {
+  flex: 1;
+  padding: 1rem;
+  text-align: center;
+  font-weight: 500;
+  color: var(--secondary-text-color);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+  position: relative;
+}
+
+.nav-item:hover {
+  background: var(--primary-color-light);
+  color: #fff;
+}
+
+.nav-item.active {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+/* Conteúdo principal */
+.content-area {
+  flex: 1;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Mensagem inicial */
+.welcome {
+  padding: 2rem;
+  text-align: center;
+}
+
+.welcome h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.welcome p {
+  color: var(--secondary-text-color);
+}
+
+/* Lista de cartões */
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+.card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.card-meta {
+  font-size: 0.85rem;
+  color: var(--secondary-text-color);
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: var(--secondary-text-color);
+  line-height: 1.4;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--overlay-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  transition: opacity 0.2s ease;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: var(--surface-color);
+  border-radius: 1rem;
+  max-width: 600px;
+  width: 100%;
+  padding: 2rem;
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--secondary-text-color);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.modal-close:hover {
+  color: var(--primary-color);
+}
+
+.modal-content h2 {
+  margin-bottom: 0.5rem;
+}
+
+.modal-content p,
+.modal-content li {
+  color: var(--secondary-text-color);
+  line-height: 1.5;
+}
+
+.modal-meta {
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  color: var(--secondary-text-color);
+}
+
+/* Link item em temas */
+.link-item {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  margin: 0.25rem 0;
+  text-align: left;
+  width: 100%;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.link-item:hover {
+  background: var(--primary-color);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Responsividade */
+@media (min-width: 768px) {
+  .app-header h1 {
+    font-size: 1.6rem;
+  }
+  .nav-item {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .content-area {
+    padding: 2rem;
+  }
+}
